@@ -1,0 +1,41 @@
+/* style.css */
+body {
+    background-color: aqua;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#searchContainer {
+    text-align: center
+}
+
+#resultsContainer {
+    width: 20%;
+    text-align: center;
+    border: 1px solid #AC1575;
+    overflow: auto
+}
+
+#previewContainer {
+    width: 68%;
+    text-align: center;
+    overflow: hidden
+}
+
+#listContainer {
+    width: 10%;
+    text-align: center;
+    border: 1px solid #AC1575;
+    overflow: hidden
+}
+
+.parent {
+    height: 100%
+}
+
+.child {
+    display: inline-block
+}
