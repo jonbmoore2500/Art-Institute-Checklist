@@ -23,10 +23,10 @@ function handleSearchCards(searchResults) {
         //console.log(entry)
         previewArr.push(entry.id)
         let li = document.createElement('li')
-        li.id = entry.id
+        // li.setAttribute('id', entry.id)
         li.className = 'resultsElements'
         li.innerHTML = `
-        <p class='titles'>${entry.title}</p>
+        <p class='titles' id='${entry.id}'>${entry.title}</p>
         `
         li.addEventListener('mouseover', (e) => {
             createPreview(e)
@@ -35,11 +35,17 @@ function handleSearchCards(searchResults) {
     })
     handlePreviewPrep(previewArr.join(','))
 }
-let previewObj = {}
+let previewArr = []
 function handlePreviewPrep(input) {
     fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display`)
     .then(resp => resp.json())
     .then(data => {
-        previewObj = data
+        previewArr = data.data
     })   
+}
+function createPreview(event) {
+    console.log(event.target.id)
+    console.log(previewArr)
+    // identify previewObj based on ID of work that is moused over
+    console.log(previewObj)
 }
