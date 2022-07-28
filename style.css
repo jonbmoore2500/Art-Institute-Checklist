@@ -6,10 +6,24 @@ body {
 h1 {
     text-align: center;
     font-size: 40px;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+}
+
+h2 {
+    color: black;
+}
+
+label {
+    font-size: large;
+    font-weight: bold;
 }
 
 #searchContainer {
-    text-align: center
+    /* text-align: center; */
+    background-image: url('https://arthive.net/res/media/img/ox800/work/a1e/265669.webp');
+    height: 200px;
+    width: 800px;
 }
 
 #resultsContainer {

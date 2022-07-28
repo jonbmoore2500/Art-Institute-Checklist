@@ -44,8 +44,19 @@ function handlePreviewPrep(input) {
     })   
 }
 function createPreview(event) {
-    console.log(event.target.id)
-    console.log(previewArr)
-    // identify previewObj based on ID of work that is moused over
+    let imageId = parseInt(event.target.id)
+    let previewObj = {}
+    // works, clean up and do without a for loop
+    for (let i=0; i<previewArr.length; i++) {
+        if (previewArr[i].id === imageId) {
+            previewObj = previewArr[i]
+        }
+    }
+    // previewObj = previewArr.find(element => {
+    //     element['id'] === imageId
+    // })
+
     console.log(previewObj)
+    // use previewObj to populate data in preview section. title, artist, year, country of origin, etc
+    // create button to add that work to "must-see" section on the right
 }
