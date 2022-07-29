@@ -37,7 +37,7 @@ function handleSearchCards(searchResults) {
 }
 let previewArr = []
 function handlePreviewPrep(input) {
-    fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display`)
+    fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_id`)
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
@@ -49,9 +49,11 @@ let prevMedium = ''
 let prevYear = ''
 let prevOrigin = ''
 
+let previewObj = {}
+
 function createPreview(event) {
     let imageId = parseInt(event.target.id)
-    let previewObj = {}
+    
     document.querySelector('#addingBtn').removeAttribute('hidden')
     // works, clean up and do without a for loop
     for (let i=0; i<previewArr.length; i++) {
@@ -64,6 +66,7 @@ function createPreview(event) {
     // })
 
     // need to make undefined display as "unknown"
+  
     document.getElementById('prevInfo').innerHTML = `
         <p>Title: ${previewObj.title}</p>
         <p>Artist: ${previewObj.artist}</p>
@@ -76,6 +79,14 @@ function createPreview(event) {
     // create button to add that work to "must-see" section on the right
 }
 const button = document.getElementById('addingBtn')
-button.addEventListener('click', (e) => {
-    handle
+button.addEventListener('click', () => {
+    let mustSeeUl = document.querySelector('#toDoList')
+    let li = document.createElement('li')
+    mustSeeArr = [previewObj.title, previewObj.gallery_id]
+    li.innerHTML = `
+        <p class='titles'>${mustSeeArr[0]}</p>
+        <p class='gallery'>Located in Gallery #${mustSeeArr[1]}</p>
+        `
+    console.log(mustSeeArr)
+    mustSeeUl.appendChild(li)
 })
