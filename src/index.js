@@ -1,5 +1,6 @@
 // index.js
 
+// create keyword search function
 const searchForm = document.getElementById('artKeywordSearch')
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -8,19 +9,19 @@ searchForm.addEventListener('submit', (e) => {
 })
 function handleSearchGet(e) {
     let searchInput = e.target.querySelector('#artSearch').value
-    
     fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&query[term][is_public_domain]=true`)
     .then(resp => resp.json())
     .then(data => {
         handleSearchCards(data.data)
     })
 }
+
+// create and populate search cards on the left
 function handleSearchCards(searchResults) {
     let resultsUl = document.getElementById('results')
     resultsUl.innerHTML = ''
     let previewArr = []
     searchResults.forEach(entry => {
-        //console.log(entry)
         previewArr.push(entry.id)
         let li = document.createElement('li')
         // li.setAttribute('id', entry.id)
@@ -35,14 +36,20 @@ function handleSearchCards(searchResults) {
     })
     handlePreviewPrep(previewArr.join(','))
 }
+
+// preps data for use in preview section
 let previewArr = []
 function handlePreviewPrep(input) {
     fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_id`)
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
-    })   
+        handleMustSeePrep(previewArr)
+    })
+    // do extra GET to get gallery info, need data from THIS GET to properly seek it...   
 }
+
+
 let prevTitle = ''
 let prevArtist = ''
 let prevMedium = ''
@@ -53,8 +60,10 @@ let previewObj = {}
 
 function createPreview(event) {
     let imageId = parseInt(event.target.id)
-    
+    // displays button
     document.querySelector('#addingBtn').removeAttribute('hidden')
+    
+    
     // works, clean up and do without a for loop
     for (let i=0; i<previewArr.length; i++) {
         if (previewArr[i].id === imageId) {
@@ -66,7 +75,8 @@ function createPreview(event) {
     // })
 
     // need to make undefined display as "unknown"
-  
+    
+    // populates preview section with info from previewObj
     document.getElementById('prevInfo').innerHTML = `
         <p>Title: ${previewObj.title}</p>
         <p>Artist: ${previewObj.artist}</p>
@@ -78,6 +88,8 @@ function createPreview(event) {
     // use previewObj to populate data in preview section. title, artist, year, country of origin, etc
     // create button to add that work to "must-see" section on the right
 }
+
+// adds selected works to MustSee section
 const button = document.getElementById('addingBtn')
 button.addEventListener('click', () => {
     let mustSeeUl = document.querySelector('#toDoList')
