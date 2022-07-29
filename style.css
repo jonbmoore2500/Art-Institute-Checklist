@@ -20,27 +20,32 @@ label {
 }
 
 #searchContainer {
-    /* text-align: center; */
+    /* position: absolute; */
     background-image: url('https://arthive.net/res/media/img/ox800/work/a1e/265669.webp');
     height: 200px;
     width: 800px;
+    /* left: calc(50vw - 400px); */
 }
 
 #resultsContainer {
-    width: 20%;
+    width: 25%;
     text-align: center;
     border: 1px solid #AC1575;
     overflow: auto
 }
 
 #previewContainer {
-    width: 68%;
+    width: 49%;
     text-align: center;
     overflow: hidden
 }
 
+#prevInfo {
+    text-align: left
+}
+
 #listContainer {
-    width: 10%;
+    width: 25%;
     text-align: center;
     border: 1px solid #AC1575;
     overflow: hidden

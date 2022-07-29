@@ -43,9 +43,16 @@ function handlePreviewPrep(input) {
         previewArr = data.data
     })   
 }
+let prevTitle = ''
+let prevArtist = ''
+let prevMedium = ''
+let prevYear = ''
+let prevOrigin = ''
+
 function createPreview(event) {
     let imageId = parseInt(event.target.id)
     let previewObj = {}
+    document.querySelector('#addingBtn').removeAttribute('hidden')
     // works, clean up and do without a for loop
     for (let i=0; i<previewArr.length; i++) {
         if (previewArr[i].id === imageId) {
@@ -56,7 +63,19 @@ function createPreview(event) {
     //     element['id'] === imageId
     // })
 
+    // need to make undefined display as "unknown"
+    document.getElementById('prevInfo').innerHTML = `
+        <p>Title: ${previewObj.title}</p>
+        <p>Artist: ${previewObj.artist}</p>
+        <p>Medium: ${previewObj.medium_display}</p>
+        <p>Year: ${previewObj.date_display}</p>
+        <p>Place of Origin: ${previewObj.place_of_origin}</p>
+        `
     console.log(previewObj)
     // use previewObj to populate data in preview section. title, artist, year, country of origin, etc
     // create button to add that work to "must-see" section on the right
 }
+const button = document.getElementById('addingBtn')
+button.addEventListener('click', (e) => {
+    handle
+})
