@@ -56,13 +56,14 @@ function createPreview(event) {
     const noDispWarn = document.createElement('p')
     noDispWarn.setAttribute('id', 'warning')
     noDispWarn.textContent = 'This work isn\'t currently on display at the AIC, we hope you can come back when it is!'
-    // matches option from results with prepped obj, sets previewObj
+    // matches option from results with selected card from results, sets previewObj
     // works, would like to clean up and do without a for loop
     for (let i=0; i<previewArr.length; i++) {
         if (previewArr[i].id === imageId) {
             previewObj = previewArr[i]
+            // changes null to anonymous for cleaner display
             if (previewObj.artist_title === null) {
-                previewObj.artist_title = 'unknown'
+                previewObj.artist_title = 'Anonymous'
             }
         }
     }
@@ -82,8 +83,6 @@ function createPreview(event) {
     }} else {
         document.querySelector('#addingBtn').style.display = 'block'
     }
-
-    // need to make undefined display as "unknown"
 }
 
 // adds selected works to MustSee section
@@ -96,6 +95,5 @@ button.addEventListener('click', () => {
         <p class='titles'><b>${mustSeeArr[0]}</b></p>
         <p class='gallery'>Location: <b class='bold'>${mustSeeArr[1]}</b></p>
         `
-    // console.log(mustSeeArr)
     mustSeeUl.appendChild(li)
 })

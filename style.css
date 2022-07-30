@@ -20,11 +20,12 @@ label {
 }
 
 #searchContainer {
-    /* position: absolute; */
+    position: absolute;
     background-image: url('https://arthive.net/res/media/img/ox800/work/a1e/265669.webp');
     height: 200px;
     width: 800px;
-    /* left: calc(50vw - 400px); */
+    left:50%;
+    margin-left: -400px;
 }
 
 #resultsContainer {
@@ -35,7 +36,7 @@ label {
 }
 
 #previewContainer {
-    width: 49%;
+    width: 47%;
     text-align: center;
     overflow: hidden
 }
@@ -52,7 +53,10 @@ label {
 }
 
 .parent {
-    height: 100%
+    position:absolute;
+    height: 100%;
+    width:100%;
+    top:300px
 }
 
 .child {
