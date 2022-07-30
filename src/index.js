@@ -9,7 +9,8 @@ searchForm.addEventListener('submit', (e) => {
 })
 function handleSearchGet(e) {
     let searchInput = e.target.querySelector('#artSearch').value
-    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}`)
+    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&limit=30`)
+    // remove limit if can't figure out how to make scrolling work correctly
     .then(resp => resp.json())
     .then(data => {
         handleSearchCards(data.data)
@@ -24,7 +25,7 @@ function handleSearchCards(searchResults) {
     searchResults.forEach(entry => {
         previewArr.push(entry.id)
         let li = document.createElement('li')
-        // li.setAttribute('id', entry.id)
+        li.setAttribute('id', entry.id)
         li.className = 'resultsElements'
         li.innerHTML = `
         <p class='titles' id='${entry.id}'>${entry.title}</p>
@@ -44,20 +45,10 @@ function handlePreviewPrep(input) {
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
-        //handleMustSeePrep(previewArr)
-        // handleMustSeePrep gets gallery info, need gallery IDs from this fetch to access them
     }) 
 }
-// let dispArr = []
-// function handleMustSeePrep(inputArr) {
-//     dispArr = inputArr.filter(obj => {
-//         obj.
-//     })
-    // pare down arr to just those with gallery IDs, 
-    // fetch their info
-    // replace the gallery IDs with gallery #s from request
-// }
 
+// populates preview section with data from the card being moused over. either shows button or warns based on gallery status
 let previewObj = {}
 function createPreview(event) {
     let imageId = parseInt(event.target.id)
@@ -70,15 +61,18 @@ function createPreview(event) {
     for (let i=0; i<previewArr.length; i++) {
         if (previewArr[i].id === imageId) {
             previewObj = previewArr[i]
+            if (previewObj.artist_title === null) {
+                previewObj.artist_title = 'unknown'
+            }
         }
     }
-    // populates preview with data
+    // populates preview with data from previewObj assigned in handlePreviewPrep
     previewHolder.innerHTML = `
-    <p>Title: ${previewObj.title}</p>
-    <p>Artist: ${previewObj.artist}</p>
-    <p>Medium: ${previewObj.medium_display}</p>
-    <p>Year: ${previewObj.date_display}</p>
-    <p>Place of Origin: ${previewObj.place_of_origin}</p>
+    <p>Title: <b>${previewObj.title}</b></p>
+    <p>Artist: <b>${previewObj.artist_title}</b></p>
+    <p>Medium: <b>${previewObj.medium_display}</b></p>
+    <p>Year: <b>${previewObj.date_display}</b></p>
+    <p>Place of Origin: <b>${previewObj.place_of_origin}</b></p>
     `
     // if not on display (gallery_title === null), displays that warning (only if not already included based on number of child nodes) and removes/replaces button
     if (previewObj.gallery_title === null) {
@@ -87,7 +81,6 @@ function createPreview(event) {
             previewHolder.appendChild(noDispWarn)
     }} else {
         document.querySelector('#addingBtn').style.display = 'block'
-        
     }
 
     // need to make undefined display as "unknown"
@@ -100,8 +93,8 @@ button.addEventListener('click', () => {
     let li = document.createElement('li')
     mustSeeArr = [previewObj.title, previewObj.gallery_title]
     li.innerHTML = `
-        <p class='titles'>${mustSeeArr[0]}</p>
-        <p class='gallery'>Location: ${mustSeeArr[1]}</p>
+        <p class='titles'><b>${mustSeeArr[0]}</b></p>
+        <p class='gallery'>Location: <b class='bold'>${mustSeeArr[1]}</b></p>
         `
     // console.log(mustSeeArr)
     mustSeeUl.appendChild(li)
