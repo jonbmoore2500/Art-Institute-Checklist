@@ -37,22 +37,26 @@ function handleSearchCards(searchResults) {
     handlePreviewPrep(previewArr.join(','))
 }
 
-// preps data for use in preview section
+// preps data for use in preview and mustSee sections
 let previewArr = []
 function handlePreviewPrep(input) {
-    fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_id`)
+    fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_title`)
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
-        handleMustSeePrep(previewArr)
+        //handleMustSeePrep(previewArr)
         // handleMustSeePrep gets gallery info, need gallery IDs from this fetch to access them
     }) 
 }
-function handleMustSeePrep() {
+// let dispArr = []
+// function handleMustSeePrep(inputArr) {
+//     dispArr = inputArr.filter(obj => {
+//         obj.
+//     })
     // pare down arr to just those with gallery IDs, 
     // fetch their info
     // replace the gallery IDs with gallery #s from request
-}
+// }
 
 let previewObj = {}
 function createPreview(event) {
@@ -76,8 +80,8 @@ function createPreview(event) {
     <p>Year: ${previewObj.date_display}</p>
     <p>Place of Origin: ${previewObj.place_of_origin}</p>
     `
-    // if not on display (gallery_id === null), displays that warning (only if not already included based on number of child nodes) and removes/replaces button
-    if (previewObj.gallery_id === null) {
+    // if not on display (gallery_title === null), displays that warning (only if not already included based on number of child nodes) and removes/replaces button
+    if (previewObj.gallery_title === null) {
         document.querySelector('#addingBtn').style.display = 'none'
         if (parseInt(previewHolder.childElementCount) === 5) {
             previewHolder.appendChild(noDispWarn)
@@ -94,10 +98,10 @@ const button = document.getElementById('addingBtn')
 button.addEventListener('click', () => {
     let mustSeeUl = document.querySelector('#toDoList')
     let li = document.createElement('li')
-    mustSeeArr = [previewObj.title, previewObj.gallery_id]
+    mustSeeArr = [previewObj.title, previewObj.gallery_title]
     li.innerHTML = `
         <p class='titles'>${mustSeeArr[0]}</p>
-        <p class='gallery'>Located in Gallery #${mustSeeArr[1]}</p>
+        <p class='gallery'>Location: ${mustSeeArr[1]}</p>
         `
     // console.log(mustSeeArr)
     mustSeeUl.appendChild(li)
