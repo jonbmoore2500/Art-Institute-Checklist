@@ -10,7 +10,6 @@ searchForm.addEventListener('submit', (e) => {
 function handleSearchGet(e) {
     let searchInput = e.target.querySelector('#artSearch').value
     fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&limit=40`)
-    // remove limit if can't figure out how to make scrolling work correctly
     .then(resp => resp.json())
     .then(data => {
         handleSearchCards(data.data)

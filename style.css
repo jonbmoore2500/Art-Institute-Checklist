@@ -1,6 +1,7 @@
 /* style.css */
 body {
     background-color: aqua;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 h1 {
@@ -8,13 +9,31 @@ h1 {
     font-size: 40px;
     background-color: rgba(0,0,0,.5);
     color: #fff;
-    max-width: 70%;
-    /* vertical-align: middle; */
+    max-width: 68%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 h2 {
-    color: black;
-    vertical-align: left;
+    /* color: black;
+    vertical-align: left; */
+    text-align: center;
+    font-size: 20px;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    max-width: 57%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+h3 {
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+form {
+    text-align: center;
+    color: white;
+    background-color: rgba(0,0,0,.5);
+    max-width: 57%
 }
 
 label {
@@ -56,11 +75,12 @@ li {
 #previewContainer {
     width: 47vw;
     text-align: center;
-    overflow: hidden
+
 }
 
-#prevInfo {
-    text-align: center
+#prevInfo, #addingBtn {
+    text-align: left;
+    margin-left: 9vw
 }
 
 #listContainer {
