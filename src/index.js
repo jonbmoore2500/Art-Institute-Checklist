@@ -96,4 +96,5 @@ button.addEventListener('click', () => {
         <p class='gallery'>Location: <b class='bold'>${mustSeeArr[1]}</b></p>
         `
     mustSeeUl.appendChild(li)
+    // add system to prevent duplicates? fix formatting first
 })

@@ -8,10 +8,18 @@ h1 {
     font-size: 40px;
     background-color: rgba(0,0,0,.5);
     color: #fff;
+    max-width: 70%;
+    /* vertical-align: middle; */
 }
 
 h2 {
     color: black;
+    vertical-align: left;
+}
+
+#hr {
+    /* position: absolute; */
+    top: 230px;
 }
 
 label {
@@ -22,21 +30,23 @@ label {
 #searchContainer {
     position: absolute;
     background-image: url('https://arthive.net/res/media/img/ox800/work/a1e/265669.webp');
-    height: 200px;
+    height: 25vh;
     width: 800px;
     left:50%;
     margin-left: -400px;
+    text-align: center;
 }
 
 #resultsContainer {
-    width: 25%;
+    width: 25vw;
+    height: 60vh;
     text-align: center;
     border: 1px solid #AC1575;
     overflow: auto
 }
 
 #previewContainer {
-    width: 47%;
+    width: 47vw;
     text-align: center;
     overflow: hidden
 }
@@ -46,7 +56,8 @@ label {
 }
 
 #listContainer {
-    width: 25%;
+    width: 25vw;
+    height: 60vh;
     text-align: center;
     border: 1px solid #AC1575;
     overflow: hidden
@@ -54,8 +65,8 @@ label {
 
 .parent {
     position:absolute;
-    height: 100%;
-    width:100%;
+    height: 60vh;
+    width:100vw;
     top:300px
 }
 
