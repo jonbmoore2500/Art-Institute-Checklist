@@ -27,6 +27,19 @@ label {
     font-weight: bold;
 }
 
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+li {
+    border: 1px solid #AC1575;
+    background-color: aliceblue;
+    max-width: 19vw;
+    border-radius: 10px; 
+}
+
 #searchContainer {
     position: absolute;
     background-image: url('https://arthive.net/res/media/img/ox800/work/a1e/265669.webp');
@@ -41,7 +54,7 @@ label {
     width: 25vw;
     height: 60vh;
     text-align: center;
-    border: 1px solid #AC1575;
+    border: 2px solid #AC1575;
     overflow: auto
 }
 
@@ -52,22 +65,22 @@ label {
 }
 
 #prevInfo {
-    text-align: left
+    text-align: center
 }
 
 #listContainer {
     width: 25vw;
     height: 60vh;
     text-align: center;
-    border: 1px solid #AC1575;
-    overflow: hidden
+    border: 2px solid #AC1575;
+    overflow: auto
 }
 
 .parent {
     position:absolute;
     height: 60vh;
     width:100vw;
-    top:300px
+    top:270px
 }
 
 .child {
