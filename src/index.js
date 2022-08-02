@@ -86,15 +86,20 @@ function createPreview(event) {
 }
 
 // adds selected works to MustSee section
+let dedupeArr = []
 const button = document.getElementById('addingBtn')
 button.addEventListener('click', () => {
     let mustSeeUl = document.querySelector('#toDoList')
     let li = document.createElement('li')
     mustSeeArr = [previewObj.title, previewObj.gallery_title]
+    // prevents duplicates from being added to final section
+    if (dedupeArr.find(element => element === previewObj.title) !== undefined) {
+        return;
+    }
+    dedupeArr.push(previewObj.title)
     li.innerHTML = `
         <p class='titles'><b>${mustSeeArr[0]}</b></p>
         <p class='gallery'>Location: <b class='bold'>${mustSeeArr[1]}</b></p>
         `
     mustSeeUl.appendChild(li)
-    // add system to prevent duplicates? fix formatting first
 })
