@@ -17,11 +17,6 @@ h2 {
     vertical-align: left;
 }
 
-#hr {
-    /* position: absolute; */
-    top: 230px;
-}
-
 label {
     font-size: large;
     font-weight: bold;
