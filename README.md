@@ -7,7 +7,7 @@ After the user enters a search term, the app lists up to 40 relevant artworks th
 
 ## Sample GIFs
 *** insert GIF showing mouse-over function
-*** insert GIF showing dedupe process
+*** insert GIF showing dedupe process and code snippet showing how it prevents
 
 ## Roadmap
 I would like to add certain extra features:

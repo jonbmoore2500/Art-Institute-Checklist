@@ -7,9 +7,10 @@ searchForm.addEventListener('submit', (e) => {
     handleSearchGet(e);
     searchForm.reset()
 })
+let searchFetch
 function handleSearchGet(e) {
     let searchInput = e.target.querySelector('#artSearch').value
-    fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&limit=40`)
+    searchFetch = fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&limit=40`)
     .then(resp => resp.json())
     .then(data => {
         handleSearchCards(data.data)
@@ -39,12 +40,15 @@ function handleSearchCards(searchResults) {
 
 // preps data for use in preview and mustSee sections
 let previewArr = []
+let previewFetch
 function handlePreviewPrep(input) {
-    fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_title`)
+    previewFetch = fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_title`)
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
+        // document.querySelector('#prevInfo').removeAttribute('hidden')
     }) 
+    Promise.all([searchFetch, previewFetch]).then(document.querySelector('#prevInfo').removeAttribute('hidden'))
 }
 
 // populates preview section with data from the card being moused over. either shows button or warns based on gallery status
@@ -63,7 +67,7 @@ function createPreview(event) {
             // changes null to anonymous for cleaner display
             if (previewObj.artist_title === null) {
                 previewObj.artist_title = 'Anonymous'
-            }
+            } // blog idea difference between for loop and array.find, other option fetch management
         }
     }
     // populates preview with data from previewObj assigned in handlePreviewPrep
