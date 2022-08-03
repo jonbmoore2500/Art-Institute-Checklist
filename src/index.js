@@ -7,7 +7,7 @@ searchForm.addEventListener('submit', (e) => {
     handleSearchGet(e);
     searchForm.reset()
 })
-let searchFetch
+let searchFetch = false
 function handleSearchGet(e) {
     let searchInput = e.target.querySelector('#artSearch').value
     searchFetch = fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchInput}&limit=40`)
@@ -30,9 +30,13 @@ function handleSearchCards(searchResults) {
         li.innerHTML = `
         <p class='titles' id='${entry.id}'>${entry.title}</p>
         `
+        Promise.all([searchFetch, previewFetch])
+        .then(
         li.addEventListener('mouseover', (e) => {
+            document.querySelector('#prevInfo').removeAttribute('hidden');
             createPreview(e)
         })
+        )
         resultsUl.appendChild(li)
     })
     handlePreviewPrep(previewArr.join(','))
@@ -40,15 +44,13 @@ function handleSearchCards(searchResults) {
 
 // preps data for use in preview and mustSee sections
 let previewArr = []
-let previewFetch
+let previewFetch = false
 function handlePreviewPrep(input) {
     previewFetch = fetch(`https://api.artic.edu/api/v1/artworks?ids=${input}&fields=id,title,thumbnail,place_of_origin,date_display,artist_title,medium_display,gallery_title`)
     .then(resp => resp.json())
     .then(data => {
         previewArr = data.data
-        // document.querySelector('#prevInfo').removeAttribute('hidden')
     }) 
-    Promise.all([searchFetch, previewFetch]).then(document.querySelector('#prevInfo').removeAttribute('hidden'))
 }
 
 // populates preview section with data from the card being moused over. either shows button or warns based on gallery status
