@@ -59,16 +59,11 @@ function createPreview(event) {
     const noDispWarn = document.createElement('p')
     noDispWarn.setAttribute('id', 'warning')
     noDispWarn.textContent = 'This work isn\'t currently on display at the AIC, we hope you can come back when it is!'
-    // matches option from results with selected card from results, sets previewObj
-    // works, would like to clean up and do without a for loop
-    for (let i=0; i<previewArr.length; i++) {
-        if (previewArr[i].id === imageId) {
-            previewObj = previewArr[i]
-            // changes null to anonymous for cleaner display
-            if (previewObj.artist_title === null) {
-                previewObj.artist_title = 'Anonymous'
-            } // blog idea difference between for loop and array.find, other option fetch management
-        }
+    // finds work from previewArr that matches selected card from results, sets previewObj
+    previewObj = previewArr.find(artwork => parseInt(artwork.id) === imageId)
+    // if no artist changes to Anonymous for cleaner display
+    if (previewObj.artist_title === null) {
+        previewObj.artist_title = 'Anonymous'
     }
     // populates preview with data from previewObj assigned in handlePreviewPrep
     previewHolder.innerHTML = `
