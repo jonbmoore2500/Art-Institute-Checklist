@@ -7,14 +7,14 @@ After the user enters a search term, the app lists up to 40 relevant artworks th
 
 
 ## Sample GIFs
-*** insert GIF showing mouse-over function following Promise.all()
+![mouseover gif](https://imgur.com/a/07Ll5pF.gif)
 
 In order to avoid displaying undefined results in the preview section due to delays in the second fetch request not returning quickly enough, the mouseover event listener is only added to the results cards once all the fetch requests have completed. This allows the preview section to be unhidden and prevents displaying undefined results.
 
 
 
 
-*** insert GIF showing dedupe process
+![prevent duplicate gif](https://imgur.com/a/y9O5fzD.gif)
 
 The app uses an array for duplication prevention. 
 Upon clicking the button to add a work to the must-see list the function checks the array to see if the work is already included. If not, it creates the card in the must-see list and adds the work to the array. If it is already included, it returns and ends the function before creating a card or adding the work to the array. See line 88 in index.js for the code in context. 
